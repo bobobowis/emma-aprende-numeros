@@ -19,7 +19,7 @@ export const Dice3D = ({ value, isRolling, type, color }: DiceProps) => {
       setRotation({
         x: rotation.x + 0.1,
         y: rotation.y + 0.1,
-        z: rotation.z + 0.1,
+        z: rotation.z,
       });
     }
   });

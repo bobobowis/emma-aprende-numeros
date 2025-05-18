@@ -19,7 +19,7 @@ export const GameController = () => {
     userGuess: "",
     isCorrect: null,
     isRolling: false,
-    score: 110,
+    score: 0,
   });
 
   const [storeState, setStoreState] = useState<StoreState>({
@@ -96,13 +96,19 @@ export const GameController = () => {
   const bgStyle =
     selectedBg?.type === "background" ? { background: selectedBg.preview } : {};
 
+  // Color for dice
+  const diceColor =
+    storeState.selectedDice === "dice-green"
+      ? "#22c55e"
+      : storeState.selectedDice === "dice-pink"
+      ? "#ec4899"
+      : "#3b82f6";
+
   return (
     <div
       style={{
         height: "100vh",
         width: "100vw",
-        maxWidth: "100vw",
-        maxHeight: "100vh",
         overflow: "hidden",
         ...bgStyle,
       }}
@@ -145,13 +151,7 @@ export const GameController = () => {
                 value={gameState.tensValue}
                 isRolling={gameState.isRolling}
                 type="tens"
-                color={
-                  storeState.selectedDice === "dice-green"
-                    ? "#22c55e"
-                    : storeState.selectedDice === "dice-pink"
-                    ? "#ec4899"
-                    : "#3b82f6"
-                }
+                color={diceColor}
               />
             </group>
             <group position={[4, 0, 0]}>
@@ -159,19 +159,19 @@ export const GameController = () => {
                 value={gameState.unitsValue}
                 isRolling={gameState.isRolling}
                 type="units"
-                color={
-                  storeState.selectedDice === "dice-green"
-                    ? "#22c55e"
-                    : storeState.selectedDice === "dice-pink"
-                    ? "#ec4899"
-                    : "#3b82f6"
-                }
+                color={diceColor}
               />
             </group>
             <OrbitControls enableZoom={false} />
           </Canvas>
         </div>
-        <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 16,
+          }}
+        >
           <button
             onClick={rollDice}
             disabled={gameState.isRolling}
@@ -179,6 +179,7 @@ export const GameController = () => {
           >
             Lanzar Dados
           </button>
+          <hr style={{ width: "100%", border: "1px solid #ccc" }} />
           <GuessInput
             value={gameState.userGuess}
             onChange={(value) =>

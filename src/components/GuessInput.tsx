@@ -24,7 +24,7 @@ export const GuessInput = ({
     <div
       style={{
         display: "flex",
-        flexDirection: "row",
+        flexDirection: "column",
         gap: 16,
         width: "100%",
         boxSizing: "border-box",
@@ -36,7 +36,6 @@ export const GuessInput = ({
         onChange={handleChange}
         disabled={disabled}
         placeholder="Escribe el número"
-        style={{ flex: 1 }}
       />
       <button onClick={onSubmit} disabled={disabled}>
         Comprobar
